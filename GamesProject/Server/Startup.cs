@@ -1,6 +1,8 @@
 using System.Linq;
 using GamesProject.Server.Data;
+using GamesProject.Server.IRepository;
 using GamesProject.Server.Models;
+using GamesProject.Server.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,6 +42,8 @@ namespace GamesProject.Server
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

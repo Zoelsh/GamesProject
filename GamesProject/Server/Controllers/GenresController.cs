@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GamesProject.Server.Data;
 using GamesProject.Shared.Domain;
+using GamesProject.Server.IRepository;
 
 namespace GamesProject.Server.Controllers
 {
@@ -14,32 +15,33 @@ namespace GamesProject.Server.Controllers
     [ApiController]
     public class GenresController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GenresController(ApplicationDbContext context)
+        public GenresController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/Genres
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
+        public async Task<IActionResult> GetGenres()
         {
-            return await _context.Genres.ToListAsync();
+            var genres = await _unitOfWork.Genres.GetAll();
+            return Ok(genres);
         }
 
         // GET: api/Genres/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Genre>> GetGenre(int id)
+        public async Task<IActionResult> GetGenre(int id)
         {
-            var genre = await _context.Genres.FindAsync(id);
+            var genre = await _unitOfWork.Genres.Get(q => q.Id == id); ;
 
             if (genre == null)
             {
                 return NotFound();
             }
 
-            return genre;
+            return Ok(genre);
         }
 
         // PUT: api/Genres/5
@@ -52,15 +54,15 @@ namespace GamesProject.Server.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(genre).State = EntityState.Modified;
+            _unitOfWork.Genres.Update(genre);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.Save(HttpContext);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GenreExists(id))
+                if (!await GenreExists(id))
                 {
                     return NotFound();
                 }
@@ -78,8 +80,8 @@ namespace GamesProject.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Genre>> PostGenre(Genre genre)
         {
-            _context.Genres.Add(genre);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Genres.Insert(genre);
+            await _unitOfWork.Save(HttpContext);
 
             return CreatedAtAction("GetGenre", new { id = genre.Id }, genre);
         }
@@ -88,21 +90,22 @@ namespace GamesProject.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGenre(int id)
         {
-            var genre = await _context.Genres.FindAsync(id);
+            var genre = await _unitOfWork.Genres.Get(q => q.Id == id);
             if (genre == null)
             {
                 return NotFound();
             }
 
-            _context.Genres.Remove(genre);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Genres.Delete(id);
+            await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private bool GenreExists(int id)
+        private async Task<bool> GenreExists(int id)
         {
-            return _context.Genres.Any(e => e.Id == id);
+            var genre = await _unitOfWork.Genres.Get(q => q.Id == id);
+            return genre != null;
         }
     }
 }
