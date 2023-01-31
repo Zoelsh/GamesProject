@@ -8,8 +8,9 @@ namespace GamesProject.Shared.Domain
 {
     public class Game : BaseDomainModel
     {
-        public DateTime DateOut { get; set; }
-        public DateTime DateIn { get; set; }
+        public string Name { get; set; }
+        public int Year { get; set; }
+        public string ReleaseDate { get; set; }
         public int GenreId { get; set; }
         public virtual Genre Genre { get; set; }
         public int GamePublisherId { get; set; }
@@ -17,6 +18,7 @@ namespace GamesProject.Shared.Domain
         public int AgeRatingId { get; set; }
         public virtual AgeRating AgeRating { get; set; }
         public virtual List<Booking> Bookings { get; set; }
+        public double Price { get; set; }
 
 
     }

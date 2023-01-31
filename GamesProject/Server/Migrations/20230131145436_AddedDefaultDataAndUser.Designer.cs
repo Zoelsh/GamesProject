@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamesProject.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230131141713_Tables")]
-    partial class Tables
+    [Migration("20230131145436_AddedDefaultDataAndUser")]
+    partial class AddedDefaultDataAndUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b83762b-6cef-4e52-b5e7-dafba0f3b557",
+                            ConcurrencyStamp = "60ea2dbd-275a-4497-b111-2b2ec14a9bf3",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -104,9 +104,9 @@ namespace GamesProject.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMyS+14Xq2ctpjRCDbCRxtFWjluhe64yycPiD8ZJ24NoCGDDti1dRSzbfr764LziDw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDICkXG+S/R2B4B65eDAXfE9FvbA1PngLpaL5S+MecAt3o+XwxfhjoJfQdcZKJwzyg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2cf72640-6c40-4b48-bd12-708701388715",
+                            SecurityStamp = "2303c461-26a7-44af-872e-430c29fc9624",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -143,8 +143,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 899, DateTimeKind.Local).AddTicks(5470),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(8146),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 229, DateTimeKind.Local).AddTicks(2089),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(2280),
                             Name = "PEGI 3",
                             UpdatedBy = "System"
                         },
@@ -152,8 +152,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9106),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9111),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3563),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3569),
                             Name = "PEGI 7",
                             UpdatedBy = "System"
                         },
@@ -161,8 +161,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9113),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9114),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3572),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3573),
                             Name = "PEGI 12",
                             UpdatedBy = "System"
                         },
@@ -170,8 +170,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9117),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9118),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3574),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3575),
                             Name = "PEGI 16",
                             UpdatedBy = "System"
                         },
@@ -179,8 +179,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9119),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 900, DateTimeKind.Local).AddTicks(9120),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3576),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3577),
                             Name = "PEGI 18",
                             UpdatedBy = "System"
                         });
@@ -290,6 +290,9 @@ namespace GamesProject.Server.Migrations
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -344,8 +347,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2554),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2566),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5884),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5926),
                             Name = "Bandai Games",
                             UpdatedBy = "System"
                         },
@@ -353,8 +356,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2570),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2571),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5929),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5932),
                             Name = "Koei",
                             UpdatedBy = "System"
                         },
@@ -362,8 +365,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2572),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2573),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5933),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5934),
                             Name = "Konami",
                             UpdatedBy = "System"
                         },
@@ -371,8 +374,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2575),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2576),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5936),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5936),
                             Name = "Namco",
                             UpdatedBy = "System"
                         },
@@ -380,8 +383,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2577),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(2578),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5938),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5938),
                             Name = "Square Enix",
                             UpdatedBy = "System"
                         });
@@ -418,8 +421,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7055),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7063),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1912),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1921),
                             Name = "Adventure",
                             UpdatedBy = "System"
                         },
@@ -427,8 +430,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7066),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7067),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1924),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1925),
                             Name = "Action",
                             UpdatedBy = "System"
                         },
@@ -436,8 +439,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7069),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7070),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1926),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1927),
                             Name = "RPG",
                             UpdatedBy = "System"
                         },
@@ -445,8 +448,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7071),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7072),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1928),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1929),
                             Name = "Strategy",
                             UpdatedBy = "System"
                         },
@@ -454,8 +457,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7073),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7074),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1930),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1931),
                             Name = "Sports",
                             UpdatedBy = "System"
                         },
@@ -463,8 +466,8 @@ namespace GamesProject.Server.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7076),
-                            DateUpdated = new DateTime(2023, 1, 31, 22, 17, 12, 902, DateTimeKind.Local).AddTicks(7076),
+                            DateCreated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1932),
+                            DateUpdated = new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1933),
                             Name = "Simulation",
                             UpdatedBy = "System"
                         });
@@ -603,14 +606,14 @@ namespace GamesProject.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "2d041519-128c-4d17-931e-ef78f42f5f22",
+                            ConcurrencyStamp = "01508b0f-2945-47c2-a50d-e039462c84a9",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "4e682482-ef3b-4a0f-9c19-1b8f5e0822c5",
+                            ConcurrencyStamp = "43d0feaf-5af1-4766-b71b-f2ed8ef1bb76",
                             Name = "User",
                             NormalizedName = "USER"
                         });
