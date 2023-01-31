@@ -13,48 +13,48 @@ namespace GamesProject.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BookingsController : ControllerBase
+    public class GamesController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public BookingsController(IUnitOfWork unitOfWork)
+        public GamesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Bookings
+        // GET: api/Games
         [HttpGet]
-        public async Task<IActionResult> GetBookings()
+        public async Task<IActionResult> GetGames()
         {
-            var Bookings = await _unitOfWork.Bookings.GetAll(includes: q => q.Include(x => x.Game).Include(x=>x.Customer));
-            return Ok(Bookings);
+            var Games = await _unitOfWork.Games.GetAll(includes: q => q.Include(x =>x.Genre).Include(x => x.GamePublisher).Include(x => x.AgeRating));
+            return Ok(Games);
         }
 
-        // GET: api/Bookings/5
+        // GET: api/Games/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBooking(int id)
+        public async Task<IActionResult> GetGame(int id)
         {
-            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id); ;
+            var Game = await _unitOfWork.Games.Get(q => q.Id == id); ;
 
-            if (Booking == null)
+            if (Game == null)
             {
                 return NotFound();
             }
 
-            return Ok(Booking);
+            return Ok(Game);
         }
 
-        // PUT: api/Bookings/5
+        // PUT: api/Games/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBooking(int id, Booking Booking)
+        public async Task<IActionResult> PutGame(int id, Game Game)
         {
-            if (id != Booking.Id)
+            if (id != Game.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Bookings.Update(Booking);
+            _unitOfWork.Games.Update(Game);
 
             try
             {
@@ -62,7 +62,7 @@ namespace GamesProject.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await BookingExists(id))
+                if (!await GameExists(id))
                 {
                     return NotFound();
                 }
@@ -75,37 +75,37 @@ namespace GamesProject.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Bookings
+        // POST: api/Games
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Booking>> PostBooking(Booking Booking)
+        public async Task<ActionResult<Game>> PostGame(Game Game)
         {
-            await _unitOfWork.Bookings.Insert(Booking);
+            await _unitOfWork.Games.Insert(Game);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetBooking", new { id = Booking.Id }, Booking);
+            return CreatedAtAction("GetGame", new { id = Game.Id }, Game);
         }
 
-        // DELETE: api/Bookings/5
+        // DELETE: api/Games/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBooking(int id)
+        public async Task<IActionResult> DeleteGame(int id)
         {
-            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
-            if (Booking == null)
+            var Game = await _unitOfWork.Games.Get(q => q.Id == id);
+            if (Game == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Bookings.Delete(id);
+            await _unitOfWork.Games.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> BookingExists(int id)
+        private async Task<bool> GameExists(int id)
         {
-            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
-            return Booking != null;
+            var Game = await _unitOfWork.Games.Get(q => q.Id == id);
+            return Game != null;
         }
     }
 }

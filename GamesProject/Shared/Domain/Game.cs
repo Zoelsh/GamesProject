@@ -9,7 +9,6 @@ namespace GamesProject.Shared.Domain
     public class Game : BaseDomainModel
     {
         public string Name { get; set; }
-        public int Year { get; set; }
         public string ReleaseDate { get; set; }
         public int GenreId { get; set; }
         public virtual Genre Genre { get; set; }
