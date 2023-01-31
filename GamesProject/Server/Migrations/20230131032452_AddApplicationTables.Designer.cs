@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GamesProject.Server.Data.Migrations
+namespace GamesProject.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230125093219_addApplicationTables")]
-    partial class addApplicationTables
+    [Migration("20230131032452_AddApplicationTables")]
+    partial class AddApplicationTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,6 +90,26 @@ namespace GamesProject.Server.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0c341fca-abf3-4188-ae3e-e04bd8155cfe",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAoT27FD6qpzkA2M+3nFz6rFJj7O2k4PUqTA+ET2WigsW44KuqylzcLJQ/A1MjDHcg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "245a733f-3b6b-4c17-86cc-cd74179ea362",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("GamesProject.Shared.Domain.AgeRating", b =>
@@ -98,9 +118,6 @@ namespace GamesProject.Server.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -111,12 +128,62 @@ namespace GamesProject.Server.Data.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("AgeRatings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 975, DateTimeKind.Local).AddTicks(6149),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(3193),
+                            Name = "PEGI 3",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5280),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5291),
+                            Name = "PEGI 7",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5295),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5297),
+                            Name = "PEGI 12",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5299),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5301),
+                            Name = "PEGI 16",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5304),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 978, DateTimeKind.Local).AddTicks(5306),
+                            Name = "PEGI 18",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("GamesProject.Shared.Domain.Booking", b =>
@@ -268,6 +335,53 @@ namespace GamesProject.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GamePublishers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7742),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7757),
+                            Name = "Bandai Games",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7761),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7763),
+                            Name = "Koei",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7765),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7766),
+                            Name = "Konami",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7768),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7769),
+                            Name = "Namco",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7770),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 980, DateTimeKind.Local).AddTicks(7772),
+                            Name = "Square Enix",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("GamesProject.Shared.Domain.Genre", b =>
@@ -295,6 +409,62 @@ namespace GamesProject.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3131),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3139),
+                            Name = "Adventure",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3143),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3145),
+                            Name = "Action",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3146),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3148),
+                            Name = "RPG",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3149),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3150),
+                            Name = "Strategy",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3152),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3153),
+                            Name = "Sports",
+                            UpdatedBy = "System"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedBy = "System",
+                            DateCreated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3155),
+                            DateUpdated = new DateTime(2023, 1, 31, 11, 24, 51, 981, DateTimeKind.Local).AddTicks(3156),
+                            Name = "Simulation",
+                            UpdatedBy = "System"
+                        });
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -425,6 +595,22 @@ namespace GamesProject.Server.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
+                            ConcurrencyStamp = "3557d4e5-5ddf-4aaa-bbc1-441dec8c66f5",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
+                            ConcurrencyStamp = "67877a35-bc1c-4ab8-b4c9-a7bb4bac7ccd",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -512,6 +698,13 @@ namespace GamesProject.Server.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
+                            RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
