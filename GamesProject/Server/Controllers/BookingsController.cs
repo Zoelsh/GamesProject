@@ -13,48 +13,48 @@ namespace GamesProject.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AgeRatingsController : ControllerBase
+    public class BookingsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AgeRatingsController(IUnitOfWork unitOfWork)
+        public BookingsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/AgeRatings
+        // GET: api/Bookings
         [HttpGet]
-        public async Task<IActionResult> GetAgeRatings()
+        public async Task<IActionResult> GetBookings()
         {
-            var AgeRatings = await _unitOfWork.AgeRatings.GetAll();
-            return Ok(AgeRatings);
+            var Bookings = await _unitOfWork.Bookings.GetAll();
+            return Ok(Bookings);
         }
 
-        // GET: api/AgeRatings/5
+        // GET: api/Bookings/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAgeRating(int id)
+        public async Task<IActionResult> GetBooking(int id)
         {
-            var AgeRating = await _unitOfWork.AgeRatings.Get(q => q.Id == id); ;
+            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id); ;
 
-            if (AgeRating == null)
+            if (Booking == null)
             {
                 return NotFound();
             }
 
-            return Ok(AgeRating);
+            return Ok(Booking);
         }
 
-        // PUT: api/AgeRatings/5
+        // PUT: api/Bookings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgeRating(int id, AgeRating AgeRating)
+        public async Task<IActionResult> PutBooking(int id, Booking Booking)
         {
-            if (id != AgeRating.Id)
+            if (id != Booking.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.AgeRatings.Update(AgeRating);
+            _unitOfWork.Bookings.Update(Booking);
 
             try
             {
@@ -62,7 +62,7 @@ namespace GamesProject.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await AgeRatingExists(id))
+                if (!await BookingExists(id))
                 {
                     return NotFound();
                 }
@@ -75,37 +75,37 @@ namespace GamesProject.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/AgeRatings
+        // POST: api/Bookings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AgeRating>> PostAgeRating(AgeRating AgeRating)
+        public async Task<ActionResult<Booking>> PostBooking(Booking Booking)
         {
-            await _unitOfWork.AgeRatings.Insert(AgeRating);
+            await _unitOfWork.Bookings.Insert(Booking);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetAgeRating", new { id = AgeRating.Id }, AgeRating);
+            return CreatedAtAction("GetBooking", new { id = Booking.Id }, Booking);
         }
 
-        // DELETE: api/AgeRatings/5
+        // DELETE: api/Bookings/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAgeRating(int id)
+        public async Task<IActionResult> DeleteBooking(int id)
         {
-            var AgeRating = await _unitOfWork.AgeRatings.Get(q => q.Id == id);
-            if (AgeRating == null)
+            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
+            if (Booking == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.AgeRatings.Delete(id);
+            await _unitOfWork.Bookings.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> AgeRatingExists(int id)
+        private async Task<bool> BookingExists(int id)
         {
-            var AgeRating = await _unitOfWork.AgeRatings.Get(q => q.Id == id);
-            return AgeRating != null;
+            var Booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
+            return Booking != null;
         }
     }
 }

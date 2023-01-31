@@ -13,48 +13,48 @@ namespace GamesProject.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AgeRatingsController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AgeRatingsController(IUnitOfWork unitOfWork)
+        public CustomersController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/AgeRatings
+        // GET: api/Customers
         [HttpGet]
-        public async Task<IActionResult> GetAgeRatings()
+        public async Task<IActionResult> GetCustomers()
         {
-            var AgeRatings = await _unitOfWork.AgeRatings.GetAll();
-            return Ok(AgeRatings);
+            var Customers = await _unitOfWork.Customers.GetAll();
+            return Ok(Customers);
         }
 
-        // GET: api/AgeRatings/5
+        // GET: api/Customers/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAgeRating(int id)
+        public async Task<IActionResult> GetCustomer(int id)
         {
-            var AgeRating = await _unitOfWork.AgeRatings.Get(q => q.Id == id); ;
+            var Customer = await _unitOfWork.Customers.Get(q => q.Id == id); ;
 
-            if (AgeRating == null)
+            if (Customer == null)
             {
                 return NotFound();
             }
 
-            return Ok(AgeRating);
+            return Ok(Customer);
         }
 
-        // PUT: api/AgeRatings/5
+        // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgeRating(int id, AgeRating AgeRating)
+        public async Task<IActionResult> PutCustomer(int id, Customer Customer)
         {
-            if (id != AgeRating.Id)
+            if (id != Customer.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.AgeRatings.Update(AgeRating);
+            _unitOfWork.Customers.Update(Customer);
 
             try
             {
@@ -62,7 +62,7 @@ namespace GamesProject.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await AgeRatingExists(id))
+                if (!await CustomerExists(id))
                 {
                     return NotFound();
                 }
@@ -75,37 +75,37 @@ namespace GamesProject.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/AgeRatings
+        // POST: api/Customers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<AgeRating>> PostAgeRating(AgeRating AgeRating)
+        public async Task<ActionResult<Customer>> PostCustomer(Customer Customer)
         {
-            await _unitOfWork.AgeRatings.Insert(AgeRating);
+            await _unitOfWork.Customers.Insert(Customer);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetAgeRating", new { id = AgeRating.Id }, AgeRating);
+            return CreatedAtAction("GetCustomer", new { id = Customer.Id }, Customer);
         }
 
-        // DELETE: api/AgeRatings/5
+        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAgeRating(int id)
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
-            var AgeRating = await _unitOfWork.AgeRatings.Get(q => q.Id == id);
-            if (AgeRating == null)
+            var Customer = await _unitOfWork.Customers.Get(q => q.Id == id);
+            if (Customer == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.AgeRatings.Delete(id);
+            await _unitOfWork.Customers.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> AgeRatingExists(int id)
+        private async Task<bool> CustomerExists(int id)
         {
-            var AgeRating = await _unitOfWork.AgeRatings.Get(q => q.Id == id);
-            return AgeRating != null;
+            var Customer = await _unitOfWork.Customers.Get(q => q.Id == id);
+            return Customer != null;
         }
     }
 }

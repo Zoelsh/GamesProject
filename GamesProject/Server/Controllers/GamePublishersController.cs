@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GamesProject.Server.Data;
 using GamesProject.Shared.Domain;
+using GamesProject.Server.IRepository;
 
 namespace GamesProject.Server.Controllers
 {
@@ -14,53 +15,54 @@ namespace GamesProject.Server.Controllers
     [ApiController]
     public class GamePublishersController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GamePublishersController(ApplicationDbContext context)
+        public GamePublishersController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/GamePublishers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GamePublisher>>> GetGamePublishers()
+        public async Task<IActionResult> GetGamePublishers()
         {
-            return await _context.GamePublishers.ToListAsync();
+            var GamePublishers = await _unitOfWork.GamePublishers.GetAll();
+            return Ok(GamePublishers);
         }
 
         // GET: api/GamePublishers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GamePublisher>> GetGamePublisher(int id)
+        public async Task<IActionResult> GetGamePublisher(int id)
         {
-            var gamePublisher = await _context.GamePublishers.FindAsync(id);
+            var GamePublisher = await _unitOfWork.GamePublishers.Get(q => q.Id == id); ;
 
-            if (gamePublisher == null)
+            if (GamePublisher == null)
             {
                 return NotFound();
             }
 
-            return gamePublisher;
+            return Ok(GamePublisher);
         }
 
         // PUT: api/GamePublishers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGamePublisher(int id, GamePublisher gamePublisher)
+        public async Task<IActionResult> PutGamePublisher(int id, GamePublisher GamePublisher)
         {
-            if (id != gamePublisher.Id)
+            if (id != GamePublisher.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(gamePublisher).State = EntityState.Modified;
+            _unitOfWork.GamePublishers.Update(GamePublisher);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.Save(HttpContext);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GamePublisherExists(id))
+                if (!await GamePublisherExists(id))
                 {
                     return NotFound();
                 }
@@ -76,33 +78,34 @@ namespace GamesProject.Server.Controllers
         // POST: api/GamePublishers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<GamePublisher>> PostGamePublisher(GamePublisher gamePublisher)
+        public async Task<ActionResult<GamePublisher>> PostGamePublisher(GamePublisher GamePublisher)
         {
-            _context.GamePublishers.Add(gamePublisher);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.GamePublishers.Insert(GamePublisher);
+            await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetGamePublisher", new { id = gamePublisher.Id }, gamePublisher);
+            return CreatedAtAction("GetGamePublisher", new { id = GamePublisher.Id }, GamePublisher);
         }
 
         // DELETE: api/GamePublishers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGamePublisher(int id)
         {
-            var gamePublisher = await _context.GamePublishers.FindAsync(id);
-            if (gamePublisher == null)
+            var GamePublisher = await _unitOfWork.GamePublishers.Get(q => q.Id == id);
+            if (GamePublisher == null)
             {
                 return NotFound();
             }
 
-            _context.GamePublishers.Remove(gamePublisher);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.GamePublishers.Delete(id);
+            await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private bool GamePublisherExists(int id)
+        private async Task<bool> GamePublisherExists(int id)
         {
-            return _context.GamePublishers.Any(e => e.Id == id);
+            var GamePublisher = await _unitOfWork.GamePublishers.Get(q => q.Id == id);
+            return GamePublisher != null;
         }
     }
 }
