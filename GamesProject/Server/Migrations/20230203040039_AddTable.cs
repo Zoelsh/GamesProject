@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GamesProject.Server.Migrations
 {
-    public partial class AddedDefaultDataAndUser : Migration
+    public partial class AddTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -272,7 +272,6 @@ namespace GamesProject.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Year = table.Column<int>(type: "int", nullable: false),
                     ReleaseDate = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GenreId = table.Column<int>(type: "int", nullable: false),
                     GamePublisherId = table.Column<int>(type: "int", nullable: false),
@@ -343,11 +342,11 @@ namespace GamesProject.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 1, 31, 22, 54, 36, 229, DateTimeKind.Local).AddTicks(2089), new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(2280), "PEGI 3", "System" },
-                    { 2, "System", new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3563), new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3569), "PEGI 7", "System" },
-                    { 3, "System", new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3572), new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3573), "PEGI 12", "System" },
-                    { 4, "System", new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3574), new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3575), "PEGI 16", "System" },
-                    { 5, "System", new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3576), new DateTime(2023, 1, 31, 22, 54, 36, 231, DateTimeKind.Local).AddTicks(3577), "PEGI 18", "System" }
+                    { 1, "System", new DateTime(2023, 2, 3, 12, 0, 39, 420, DateTimeKind.Local).AddTicks(9923), new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(6464), "PEGI 3", "System" },
+                    { 2, "System", new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7343), new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7348), "PEGI 7", "System" },
+                    { 3, "System", new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7349), new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7350), "PEGI 12", "System" },
+                    { 4, "System", new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7352), new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7353), "PEGI 16", "System" },
+                    { 5, "System", new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7354), new DateTime(2023, 2, 3, 12, 0, 39, 422, DateTimeKind.Local).AddTicks(7355), "PEGI 18", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -355,25 +354,25 @@ namespace GamesProject.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "43d0feaf-5af1-4766-b71b-f2ed8ef1bb76", "User", "USER" },
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "01508b0f-2945-47c2-a50d-e039462c84a9", "Administrator", "ADMINISTRATOR" }
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "50ae26b7-542d-4f99-88b3-10b4ae2b1099", "User", "USER" },
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "da178469-b3f8-41f8-baa9-923dfe9ca94f", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "60ea2dbd-275a-4497-b111-2b2ec14a9bf3", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEDICkXG+S/R2B4B65eDAXfE9FvbA1PngLpaL5S+MecAt3o+XwxfhjoJfQdcZKJwzyg==", null, false, "2303c461-26a7-44af-872e-430c29fc9624", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "190b6eb6-a3dc-4bd8-a5b9-19e1fe5d3085", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEFInLTZpZ/9lReXW7qFsCnN0Q0Hsm8wo8Co3PlPaiV9i3vf9bzWXOKggG/DZ10A2sQ==", null, false, "d407ec3a-129d-4bfe-bea1-9539f9c1db98", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "GamePublishers",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 3, "System", new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5933), new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5934), "Konami", "System" },
-                    { 1, "System", new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5884), new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5926), "Bandai Games", "System" },
-                    { 5, "System", new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5938), new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5938), "Square Enix", "System" },
-                    { 2, "System", new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5929), new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5932), "Koei", "System" },
-                    { 4, "System", new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5936), new DateTime(2023, 1, 31, 22, 54, 36, 234, DateTimeKind.Local).AddTicks(5936), "Namco", "System" }
+                    { 3, "System", new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8961), new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8962), "Konami", "System" },
+                    { 1, "System", new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8948), new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8956), "Bandai Games", "System" },
+                    { 5, "System", new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8965), new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8966), "Square Enix", "System" },
+                    { 2, "System", new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8959), new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8960), "Koei", "System" },
+                    { 4, "System", new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8963), new DateTime(2023, 2, 3, 12, 0, 39, 423, DateTimeKind.Local).AddTicks(8964), "Namco", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -381,12 +380,12 @@ namespace GamesProject.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1912), new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1921), "Adventure", "System" },
-                    { 2, "System", new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1924), new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1925), "Action", "System" },
-                    { 3, "System", new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1926), new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1927), "RPG", "System" },
-                    { 4, "System", new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1928), new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1929), "Strategy", "System" },
-                    { 5, "System", new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1930), new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1931), "Sports", "System" },
-                    { 6, "System", new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1932), new DateTime(2023, 1, 31, 22, 54, 36, 235, DateTimeKind.Local).AddTicks(1933), "Simulation", "System" }
+                    { 1, "System", new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2586), new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2592), "Adventure", "System" },
+                    { 2, "System", new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2595), new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2596), "Action", "System" },
+                    { 3, "System", new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2597), new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2598), "RPG", "System" },
+                    { 4, "System", new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2599), new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2600), "Strategy", "System" },
+                    { 5, "System", new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2601), new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2602), "Sports", "System" },
+                    { 6, "System", new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2603), new DateTime(2023, 2, 3, 12, 0, 39, 424, DateTimeKind.Local).AddTicks(2604), "Simulation", "System" }
                 });
 
             migrationBuilder.InsertData(
