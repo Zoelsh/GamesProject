@@ -1,0 +1,22 @@
+﻿@page "/AgeRatings/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditAgeRating" ageRating="ageRating" />
+
+@code{
+    [Parameter] public int id { get; set; }
+    AgeRating ageRating = new AgeRating();
+    protected async override Task OnParametersSetAsync()
+    {
+        ageRating = await _client.GetFromJsonAsync<AgeRating>($"{Endpoints.AgeRatingsEndpoint}/{id}");
+    }
+    async Task EditAgeRating()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.AgeRatingsEndpoint}/{id}", ageRating);
+        _navManager.NavigateTo("/AgeRating");
+    }
+
+
+}

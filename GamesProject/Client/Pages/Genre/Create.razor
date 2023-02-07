@@ -1,0 +1,35 @@
+﻿@page "/Genre/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Games</h3>
+<hr />
+<br />
+
+<EditForm Model="@genre" OnValidSubmit="CreateGenre">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>GenreName: </label>
+        <div>
+            <InputText @bind-Value="genre.Name" class="form-control" />
+            <ValidationMessage For="@(()=> genre.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Game
+    </button>
+</EditForm>
+
+@code {
+
+    Genre genre = new Genre();
+
+    private async Task CreateGenre()
+    {
+        await _client.PostAsJsonAsync(Endpoints.GenresEndpoint, genre);
+        _navManager.NavigateTo("/Genre");
+    }
+
+}

@@ -1,0 +1,35 @@
+﻿@page "/GamePublisher/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New GamePublisher</h3>
+<hr />
+<br />
+
+<EditForm Model="@gamePublisher" OnValidSubmit="CreateGamePublisher">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>GamePublisherName: </label>
+        <div>
+            <InputText @bind-Value="gamePublisher.Name" class="form-control" />
+            <ValidationMessage For="@(()=> gamePublisher.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create GamePublisher
+    </button>
+</EditForm>
+
+@code {
+
+    GamePublisher gamePublisher = new GamePublisher();
+
+    private async Task CreateGamePublisher()
+    {
+        await _client.PostAsJsonAsync(Endpoints.GamePublishersEndpoint, gamePublisher);
+        _navManager.NavigateTo("/GamePublisher");
+    }
+
+}

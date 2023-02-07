@@ -1,0 +1,22 @@
+﻿<EditForm Model="@gamePublisher" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>New GamePublisher </label>
+        <div>
+            <InputText @bind-Value="gamePublisher.Name" class="form-control" />
+            <ValidationMessage For="@(()=> gamePublisher.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+</EditForm>
+
+@code{
+    [Parameter] public GamePublisher gamePublisher { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+}

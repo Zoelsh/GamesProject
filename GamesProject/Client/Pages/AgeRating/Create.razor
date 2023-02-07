@@ -1,0 +1,35 @@
+﻿@page "/AgeRating/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New AgeRating</h3>
+<hr />
+<br />
+
+<EditForm Model="@ageRating" OnValidSubmit="CreateAgeRating">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>AgeRatingName: </label>
+        <div>
+            <InputText @bind-Value="ageRating.Name" class="form-control" />
+            <ValidationMessage For="@(()=> ageRating.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create AgeRating
+    </button>
+</EditForm>
+
+@code {
+
+    AgeRating ageRating = new AgeRating();
+
+    private async Task CreateAgeRating()
+    {
+        await _client.PostAsJsonAsync(Endpoints.AgeRatingsEndpoint, ageRating);
+        _navManager.NavigateTo("/AgeRating");
+    }
+
+}

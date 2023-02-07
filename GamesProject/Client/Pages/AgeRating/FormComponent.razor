@@ -1,0 +1,22 @@
+﻿<EditForm Model="@ageRating" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>AgeRating: </label>
+        <div>
+            <InputText @bind-Value="ageRating.Name" class="form-control" />
+            <ValidationMessage For="@(()=> ageRating.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+</EditForm>
+
+@code{
+    [Parameter] public AgeRating ageRating { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+}

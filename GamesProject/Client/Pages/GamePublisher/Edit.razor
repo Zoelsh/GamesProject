@@ -1,0 +1,22 @@
+﻿@page "/GamePublishers/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditGamePublisher" gamePublisher="gamePublisher" />
+
+@code{
+    [Parameter] public int id { get; set; }
+    GamePublisher gamePublisher = new GamePublisher();
+    protected async override Task OnParametersSetAsync()
+    {
+        gamePublisher = await _client.GetFromJsonAsync<GamePublisher>($"{Endpoints.GamePublishersEndpoint}/{id}");
+    }
+    async Task EditGamePublisher()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.GamePublishersEndpoint}/{id}", gamePublisher);
+        _navManager.NavigateTo("/GamePublisher");
+    }
+
+
+}
