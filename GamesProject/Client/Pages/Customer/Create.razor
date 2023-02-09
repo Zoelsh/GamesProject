@@ -1,0 +1,35 @@
+﻿@page "/Customer/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Customer</h3>
+<hr />
+<br />
+
+<EditForm Model="@customer" OnValidSubmit="CreateCustomer">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label>CustomerName: </label>
+        <div>
+            <InputText @bind-Value="customer.Name" class="form-control" />
+            <ValidationMessage For="@(()=> customer.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Customer
+    </button>
+</EditForm>
+
+@code {
+
+    Customer customer = new Customer();
+
+    private async Task CreateCustomer()
+    {
+        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, Customer);
+        _navManager.NavigateTo("/Customer");
+    }
+
+}
