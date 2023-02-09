@@ -6,21 +6,7 @@
 <hr />
 <br />
 
-<EditForm Model="@genre" OnValidSubmit="CreateGenre">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="form-group">
-        <label>GenreName: </label>
-        <div>
-            <InputText @bind-Value="genre.Name" class="form-control" />
-            <ValidationMessage For="@(()=> genre.Name)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create Game
-    </button>
-</EditForm>
+<FormComponent ButtonText="Create Genre" genre="genre"OnValidSubmit="@CreateGenre" />
 
 @code {
 

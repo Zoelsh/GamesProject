@@ -6,21 +6,7 @@
 <hr />
 <br />
 
-<EditForm Model="@gamePublisher" OnValidSubmit="CreateGamePublisher">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div class="form-group">
-        <label>GamePublisherName: </label>
-        <div>
-            <InputText @bind-Value="gamePublisher.Name" class="form-control" />
-            <ValidationMessage For="@(()=> gamePublisher.Name)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create GamePublisher
-    </button>
-</EditForm>
+<FormComponent ButtonText="Create GamePublisher" gamePublisher="gamePublisher" OnValidSubmit="@CreateGamePublisher" />
 
 @code {
 

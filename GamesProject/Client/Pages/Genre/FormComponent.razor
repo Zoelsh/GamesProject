@@ -1,20 +1,30 @@
 ﻿<EditForm Model="@genre" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="form-group">
-        <label>GenreName: </label>
-        <div>
-            <InputText @bind-Value="genre.Name" class="form-control" />
-            <ValidationMessage For="@(()=> genre.Name)" />
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>GenreName: </label>
+            <div>
+                <InputText @bind-Value="genre.Name" class="form-control" />
+                <ValidationMessage For="@(()=> genre.Name)" />
+            </div>
         </div>
-    </div>
 
-    <button type="submit" class="btn btn-success btn-block">
-        @ButtonText
-    </button>
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+        @if (!Disabled)
+        {
+            <button type="submit" class="btn btn-success btn-block">
+                @ButtonText
+            </button>
+        }
+        </fieldset>
+        <GamesProject.Client.Components.BackToList Target="genre" />
 </EditForm>
 
 @code{
+    [Parameter] public bool Disabled { get; set; } = false;
     [Parameter] public Genre genre { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }

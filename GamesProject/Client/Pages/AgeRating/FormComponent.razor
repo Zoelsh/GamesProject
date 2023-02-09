@@ -1,20 +1,27 @@
 ﻿<EditForm Model="@ageRating" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="form-group">
-        <label>AgeRating: </label>
-        <div>
-            <InputText @bind-Value="ageRating.Name" class="form-control" />
-            <ValidationMessage For="@(()=> ageRating.Name)" />
+    <fieldset disabled="@Disabled">
+        <div class="form-group">
+            <label>AgeRating: </label>
+            <div>
+                <InputText @bind-Value="ageRating.Name" class="form-control" />
+                <ValidationMessage For="@(()=> ageRating.Name)" />
+            </div>
         </div>
-    </div>
+    </fieldset>
 
-    <button type="submit" class="btn btn-success btn-block">
-        @ButtonText
-    </button>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <GamesProject.Client.Components.BackToList Target="ageRating" />
 </EditForm>
 
 @code{
+    [Parameter] public bool Disabled { get; set; } = false;
     [Parameter] public AgeRating ageRating { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
