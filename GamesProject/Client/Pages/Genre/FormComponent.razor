@@ -9,17 +9,15 @@
                 <ValidationMessage For="@(()=> genre.Name)" />
             </div>
         </div>
+    </fieldset>
 
-        <button type="submit" class="btn btn-success btn-block">
-            @ButtonText
-        </button>
         @if (!Disabled)
         {
             <button type="submit" class="btn btn-success btn-block">
                 @ButtonText
             </button>
         }
-        </fieldset>
+        
         <GamesProject.Client.Components.BackToList Target="genre" />
 </EditForm>
 
