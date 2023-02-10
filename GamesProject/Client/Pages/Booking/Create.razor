@@ -73,8 +73,8 @@
 
     private async Task CreateBooking()
     {
-        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, Customer);
-        _navManager.NavigateTo("/Customer");
+        await _client.PostAsJsonAsync(Endpoints.BookingsEndpoint, Booking);
+        _navManager.NavigateTo("/Booking");
     }
 
 }
