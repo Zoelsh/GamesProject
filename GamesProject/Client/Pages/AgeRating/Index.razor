@@ -2,8 +2,6 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-@inject HttpInterceptorService _interceptor
-@implements IDisposable
 
 <div style="background: #ffd89b; /* fallback for old browsers */
      background: -webkit-linear-gradient(to right, #19547b, #ffd89b); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #19547b, #ffd89b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
@@ -55,7 +53,6 @@
 
         protected async override Task OnInitializedAsync()
         {
-            _interceptor.MonitorEvent();
             AgeRatings = await _client.GetFromJsonAsync<List<AgeRating>>($"{Endpoints.AgeRatingsEndpoint}");
         }
 
@@ -68,11 +65,6 @@
                 await _client.DeleteAsync($"{Endpoints.AgeRatingsEndpoint}/{AgeRatingId}");
                 await OnInitializedAsync();
             }
-        }
-
-        public void Dispose()
-        {
-            _interceptor.DisposeEvent();
         }
     }
 </div>
