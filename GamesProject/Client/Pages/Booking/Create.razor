@@ -1,34 +1,79 @@
-﻿@page "/Customer/create/"
+﻿@page "/Booking/create/"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
-<h3 class="card-title">Create New Customer</h3>
+<h3 class="card-title">Create New Booking</h3>
 <hr />
 <br />
 
-<EditForm Model="@customer" OnValidSubmit="CreateCustomer">
+<EditForm Model="@booking" OnValidSubmit="CreateBooking">
     <DataAnnotationsValidator />
     <ValidationSummary />
+
     <div class="form-group">
-        <label>CustomerName: </label>
+        <label>DateOut: </label>
         <div>
-            <InputText @bind-Value="customer.Name" class="form-control" />
-            <ValidationMessage For="@(()=> customer.Name)" />
+            <InputDate @bind-Value="booking.DateOut" class="form-control" />
+            <ValidationMessage For="@(()=> booking.DateOut)" />
+        </div>
+    </div>
+
+
+    @if (booking.Id > 0)
+    {
+        <div class="form-group">
+            <label>Date In: </label>
+            <div>
+                <InputDate @bind-Value="@booking.DateIn" class="form-control" />
+                <ValidationMessage For="@(() => booking.DateIn)" />
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <label>GameID: </label>
+        <div>
+            <InputNumber @bind-Value="game.GameID" class="form-control" />
+            <ValidationMessage For="@(()=> game.GameID)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Game Game: </label>
+        <div>
+            <InputVirtual @bind-Value="game.Game" class="form-control" />
+            <ValidationMessage For="@(()=> game.GameID)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>GameID: </label>
+        <div>
+            <InputNumber @bind-Value="customer.CustomerID" class="form-control" />
+            <ValidationMessage For="@(()=> customer.CustomerID)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Customer Customer: </label>
+        <div>
+            <InputVirtual @bind-Value="customer.Customer" class="form-control" />
+            <ValidationMessage For="@(()=> customer.Customer)" />
         </div>
     </div>
 
     <button type="submit" class="btn btn-success btn-block">
-        Create Customer
+        Create Booking
     </button>
 </EditForm>
 
 @code {
 
-    Customer customer = new Customer();
+    Booking booking = new Booking();
 
-    private async Task CreateCustomer()
+    private async Task CreateBooking()
     {
-        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, customer);
+        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, Customer);
         _navManager.NavigateTo("/Customer");
     }
 

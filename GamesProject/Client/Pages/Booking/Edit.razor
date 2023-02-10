@@ -1,0 +1,29 @@
+@page "/Booking/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditBooking" booking="booking" />
+
+@code{
+    [Parameter] public int id { get; set; }
+    [Parameter] public DateTime DateOut { get; set; }
+    [Parameter] public DateTime DateIn { get; set; }
+    [Parameter] public int GameId { get; set; }
+    [Parameter] public virtual Game Game { get; set; }
+    [Parameter] public int CustomerId { get; set; }
+    [Parameter] public virtual Customer Customer { get; set; }
+    Genre genre = new Genre();
+    Booking booking = new Booking();
+    protected async override Task OnParametersSetAsync()
+    {
+        booking = await _client.GetFromJsonAsync<Booking>($"{Endpoints.BookingsEndpoint}/{id}");
+    }
+    async Task EditBooking()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.BookingsEndpoint}/{id}", booking);
+        _navManager.NavigateTo("/Booking");
+    }
+
+
+}
