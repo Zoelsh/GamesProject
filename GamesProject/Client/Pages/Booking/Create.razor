@@ -28,7 +28,7 @@
 
     private async Task CreateCustomer()
     {
-        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, Customer);
+        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, customer);
         _navManager.NavigateTo("/Customer");
     }
 
